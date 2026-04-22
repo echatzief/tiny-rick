@@ -1,28 +1,13 @@
 use serde::Deserialize;
 
-#[derive(Debug, Deserialize)]
+use crate::{providers::types::Provider, tools::types::Permission};
+use crate::{ui::types::UIConfig};
+use crate::{agents::types::Agent};
+
+#[derive(Deserialize)]
 pub struct Config {
-    pub agent: AgentConfig,
-}
-
-#[derive(Deserialize)]
-pub struct AgentConfig {
-    pub provider: String,
-    pub model: String,
-    pub max_iterations: u32,
-    pub system_prompt: String,
+    pub providers: Vec<Provider>,
     pub permissions: Vec<Permission>,
-}
-
-#[derive(Deserialize)]
-pub enum PermissionAction {
-    Allow,
-    Deny,
-    Ask,
-}
-
-#[derive(Deserialize)]
-pub struct Permission {
-    pub name: String,
-    pub action: PermissionAction,
+    pub agents: Vec<Agent>,
+    pub ui: Vec<UIConfig>
 }
